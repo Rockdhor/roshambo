@@ -1,0 +1,78 @@
+#title {
+    color:#FD8A29;
+}
+body {
+    color: white;
+    background-color: #000000;
+}
+
+h1 {
+    font-size: 7.5rem;
+    margin-top: 3vh;
+    margin-bottom: 0;
+    color: white;
+    text-shadow : 2px 2px #FD8A29;
+}
+div {
+    text-align: center;
+    transition: all .07s ease;
+}
+
+.point {
+    transform: scale(1.1);
+    background-color: #FD8A29;
+}
+
+.winner {
+    transform: scale(1.1);
+    background-color: #FD8A29;
+}
+
+#marker div {
+    width: 7vw;
+    height: 10vw;
+    border: 5px solid white;
+    display: inline-block;
+    border-radius: 10%;
+    margin: 1vh 5vw;
+}
+
+#marker div p {
+    color: white;
+}
+
+.score {
+    margin-top: 1vh;
+    margin-bottom: auto;
+    color: #FD8A29;
+    font-size: 5rem;
+    text-shadow : 2px 2px #FD8A29;
+}
+
+#options {
+    margin: 2.5vh;
+} 
+
+button {
+    border: none;
+    background: none;
+    margin: 0 1vw;
+
+}
+
+#reset {
+    height: 2rem;
+    width: 5rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #FD8A29;
+}
+
+img {
+    height: 15vh;
+    width: 15vh;
+}
+
+#log {
+    margin-top: 25vh;
+}

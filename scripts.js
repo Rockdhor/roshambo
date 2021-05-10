@@ -40,16 +40,62 @@ let playRound = (playerSelection, computerSelection) => {
     }
   }
 
-let game = () => {
-    let p1Wins = 0, p2Wins = 0;
-    while (p1Wins < 5 && p2Wins < 5) {
-        const results = playRound(prompt("Rock, paper or scissors!"),computerPlay())
-        console.log(results[1])
-        if (results[0] == 1) {p1Wins += 1}
-        else if (results[0] == 2)  {p2Wins += 1}
-        console.log(`Player: ${p1Wins} | Computer: ${p2Wins}`)
-    }
-    console.log(p1Wins == 5 ? "You've won the game!" : "You've lost the game.")
+const checkWinner = () => {
+    return parseInt(document.querySelector('#playerScore').textContent) == 5 ? 1 
+    : parseInt(document.querySelector('#computerScore').textContent) == 5 ? 2 :
+    null
 }
 
-game()
+const handleClick = (e) => {
+    if (checkWinner()) return
+    const round = playRound(e.target.alt, computerPlay());
+    console.log(round)
+    switch (round[0]) {
+        case 1:
+            const playerScore = document.querySelector('#playerScore');
+            playerScore.textContent = parseInt(playerScore.textContent) + 1;
+            document.querySelector("#playerMarker").classList.add("point");
+            break;
+        case 2:
+            const computerScore = document.querySelector('#computerScore');
+            computerScore.textContent = parseInt(computerScore.textContent) + 1;
+            document.querySelector("#computerMarker").classList.add("point");
+            break;
+    
+        default:
+            break;
+    }
+    const log = document.querySelector('#log');
+    let result = document.createElement("P");
+    result.appendChild(document.createTextNode(round[1]));
+    log.appendChild(result);
+    const winner = checkWinner();
+    if (winner) {
+        result = document.createElement("P");
+        result.appendChild(document.createTextNode(winner == 1 ? "You win the game!" : "The computer has won."));
+        log.appendChild(result);
+        document.querySelector("h2").textContent = winner == 1 ? "You win the game!" : "The computer has won.";
+        document.querySelector(winner == 1 ? "#playerMarker" : "#computerMarker").classList.add("winner")
+    }
+
+
+    
+}
+
+const removeTransition = (e) => {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('point');
+}
+
+const resetPage = (e) => {
+    window.location.reload();
+}
+
+let p1Wins = 0, p2Wins = 0;
+const buttons = Array.from(document.querySelectorAll('.option'));
+const markers = Array.from(document.querySelectorAll('.marker'));
+console.log(markers);
+markers.forEach(marker => marker.addEventListener('transitionend', removeTransition));
+buttons.forEach(button => button.addEventListener('click', handleClick));
+const reset = document.querySelector('#reset');
+reset.addEventListener('click', resetPage);
